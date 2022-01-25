@@ -58,10 +58,24 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const product = await productCollection.findOne(query);
-            // console.log(product);
-            // const result = product.toArray();
             res.json(product);
         });
+
+        // find order by email
+        app.get("/orders", async (req, res) => {
+            const email = req.query.email;
+            const orders = PurchasedProductCollection.find({ email });
+            const result = await orders.toArray();
+            res.json(result)
+        })
+
+        // delete a order by id
+        app.delete("/deleteorder/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)}
+            const result = await PurchasedProductCollection.deleteOne(query);
+            res.json(result);        
+        })
     }
     finally {
         // await client.close();
