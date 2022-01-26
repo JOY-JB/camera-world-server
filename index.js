@@ -23,6 +23,7 @@ async function run() {
         const database = client.db("camera_world");
         const productCollection = database.collection("products");
         const PurchasedProductCollection = database.collection("purchased_product");
+        const reviewCollection = database.collection("review");
 
 
         // Product add to db
@@ -67,15 +68,30 @@ async function run() {
             const orders = PurchasedProductCollection.find({ email });
             const result = await orders.toArray();
             res.json(result)
-        })
+        });
 
         // delete a order by id
         app.delete("/deleteorder/:id", async (req, res) => {
             const id = req.params.id;
-            const query = {_id: ObjectId(id)}
+            const query = { _id: ObjectId(id) }
             const result = await PurchasedProductCollection.deleteOne(query);
-            res.json(result);        
+            res.json(result);
+        });
+
+        // add a review to db
+        app.post("/addreview", async (req, res) => {
+            const data = req.body;
+            const result = await reviewCollection.insertOne(data);
+            res.json(result);
+        });
+
+        //get all user review
+        app.get("/reviews", async (req, res) => {
+            const reviews = reviewCollection.find({});
+            const result = await reviews.toArray();
+            res.json(result);
         })
+
     }
     finally {
         // await client.close();
