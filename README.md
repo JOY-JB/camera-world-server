@@ -4,9 +4,9 @@
 
 This is a Niche website for selling digital cameras. This website is using tailwindcss, firebase, react-router-dom, react-hook-form, react-slick, headlessui, node, dotenv, express, mongodb.
 
-    * Live Site Link:- 
+    * Live Site Link:- https://camera-world-1d669.web.app/
 
-    * Client Site Code Link:- 
+    * Client Site Code Link:- https://github.com/JOY-JB/camera-world-client
 
 ### Features
 
